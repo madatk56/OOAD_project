@@ -1,56 +1,58 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
+
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Hidden from '@material-ui/core/Hidden';
-
-const post ={
-  image:'https://cdn.pixabay.com/photo/2017/04/03/15/52/love-you-2198772__340.png',
-  title:'love image'
-}
-const useStyles = makeStyles({
-  card: {
-    display: 'flex',
-  },
-  cardDetails: {
-    flex: 1,
-  },
-  cardMedia: {
-    width: 160,
-  },
+import { useCookies } from 'react-cookie';
+const useStyles = makeStyles((theme) => {
+  return {
+    card: {
+      display: 'flex',
+      margin: theme.spacing(2)
+    },
+    cardDetails: {
+      flex: 1,
+    },
+    cardMedia: {
+      width: 160,
+    },
+  }
 });
 
 export default function FeaturedPost(props) {
   const classes = useStyles();
+  const [cookie] = useCookies()
+  const { company } = props.data;
+ const href = cookie.token === "admin" ? `/corp/${company._id}`
+  :  `/users/${company._id}`
   return (
-    <Grid item xs={12} md={4}>
-      <CardActionArea component="a" href="#">
+    <CardActionArea >
+      <Link to={href} style={{ textDecoration: 'none' }}>
         <Card className={classes.card}>
           <div className={classes.cardDetails}>
             <CardContent>
               <Typography component="h2" variant="h5">
-               title
+                {company.companyName}
               </Typography>
-              <Typography variant="subtitle1" color="textSecondary">
-                date
+              <Typography variant="subtitle2" color="textSecondary">
+                {company.address}
               </Typography>
               <Typography variant="subtitle1" paragraph>
-               description
+                {company.safary}
               </Typography>
               <Typography variant="subtitle1" color="primary">
                 Continue reading...
               </Typography>
             </CardContent>
           </div>
-          <Hidden xsDown>
+          {/* <Hidden xsDown>
             <CardMedia className={classes.cardMedia} image={post.image} title={post.imageTitle} />
-          </Hidden>
+          </Hidden> */}
         </Card>
-      </CardActionArea>
-    </Grid>
+      </Link>
+    </CardActionArea>
   );
 }

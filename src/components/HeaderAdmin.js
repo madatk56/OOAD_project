@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { useCookies } from 'react-cookie';
 
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   },
   link: {
     margin: theme.spacing(1, 1.5),
-    textDecoration:'none'
+    textDecoration: 'none'
   },
   heroContent: {
     padding: theme.spacing(8, 0, 6),
@@ -58,11 +58,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Pricing() {
   const classes = useStyles();
-  const [cookie,setCookie,removeCookie] = useCookies('token');
-  const handleLogout = async()=>{
+  const [cookie, setCookie, removeCookie] = useCookies('token');
+  const handleLogout = async () => {
     await removeCookie('token');
   }
- 
+
   return (
     <React.Fragment>
       <CssBaseline />
@@ -73,8 +73,8 @@ export default function Pricing() {
            Find Job
           </Typography>
           <nav>
-            <Link variant="button" color="textPrimary" to="#" className={classes.link}>
-              Tạo CV
+            <Link variant="button" color="textPrimary" to="/corp/post" className={classes.link}>
+              Đăng tuyển
             </Link>
             <Link variant="button" color="textPrimary" to="#" className={classes.link}>
               Ngành
@@ -83,9 +83,11 @@ export default function Pricing() {
               Liên hệ
             </Link>
           </nav>
+
           <Link onClick={handleLogout} to='/login' className={classes.link} >
-            <Button  onClick={handleLogout} color="primary" variant="outlined" className={classes.link}>Đăng xuất</Button>
+            <Button  color="primary" variant="outlined" className={classes.link}>Đăng xuất</Button>
           </Link>
+
         </Toolbar>
       </AppBar>
     </React.Fragment>
