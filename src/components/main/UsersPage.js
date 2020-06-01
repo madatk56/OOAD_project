@@ -16,7 +16,7 @@ const Companies = () => {
   useEffect(() => {
     getData()
   }, [])
-  if (data !== null && cookie.token !== undefined && cookie.token !=='admin') {return (
+  if (cookie.token !=='admin') {return (
     <React.Fragment>
       <Header />
       <Grid xs={12} container >
@@ -30,12 +30,11 @@ const Companies = () => {
 
   )}else if(cookie.token === undefined){
     return(
-      <Redirect to='/login' />
+      <Redirect to='/' />
     )
   }
   return (
     <React.Fragment>
-
     </React.Fragment>
   )
 }

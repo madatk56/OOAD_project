@@ -11,11 +11,11 @@ const Companies = () => {
   const getData = async () => {
     const list = await PostServices.getAll();
     setData(list.data)
-
   }
   useEffect(() => {
     getData()
   }, [])
+  
   if (data !== null && cookie.token ==='admin') {return (
     <React.Fragment>
       <Header />
@@ -30,12 +30,12 @@ const Companies = () => {
 
   )}else if(cookie.token === undefined){
     return(
-      <Redirect to='/login' />
+      <Redirect to='/' />
     )
   }
   return (
     <React.Fragment>
-
+      {console.log(cookie)}
     </React.Fragment>
   )
 }

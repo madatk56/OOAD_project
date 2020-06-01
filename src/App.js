@@ -6,24 +6,27 @@ import Companies from './components/main/Companies'
 import Footer from './components/Footer';
 import UsersPage from './components/main/UsersPage'
 import AddNewJob from './components/main/AddNewJob/AddNewJob';
-import { useCookies } from 'react-cookie';
+import PostPage from './components/main/PostPage';
 function App() {
   
   return (
     <React.Fragment>
        <Router>
         <Switch>
-          <Route path="/login">
+          <Route exact path="/">
             <Login />
           </Route>
           <Route exact path="/corp">
             <Companies />
           </Route>
-          <Route path="/users">
+          <Route exact path="/users">
             <UsersPage />
           </Route>
           <Route path="/corp/post">
             <AddNewJob />
+          </Route>
+          <Route path="/users/:id"> 
+            <PostPage />
           </Route>
         </Switch>
     </Router>

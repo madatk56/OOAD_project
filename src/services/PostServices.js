@@ -1,27 +1,27 @@
 import Axios from 'axios';
-import url from './api'; 
+import url from './api';
 
-async function getAll(){
+async function getAll() {
   const url_getAll = url.post.getAll;
   const data = await Axios.get(url_getAll);
   return data;
 }
 /*  */
-async function getById(id){
+async function getById(id) {
   const url_getById = `${url.post.getById}${id}`
   const data = await Axios.get(url_getById);
   return data
 }
 /*  */
-async function createPost(post){
+async function createPost(post) {
   const url_create = url.post.create;
-  const data = await Axios.post(url_create,post)
+  const data = await Axios.post(url_create, post)
   return data
 }
 /*  */
-async function deletePost(data){
+async function deletePost(data) {
   const url_delete = `${url.post.delete}`
-  const result = await Axios.post(url_delete,data)
+  const result = await Axios.post(url_delete, data)
   return result
 }
 export default {

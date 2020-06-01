@@ -6,13 +6,13 @@ import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
-import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
-import CheckoutInfo from './CheckoutInfo';
-import InputAddJob from './InputAddJob';
 import Header from '../../HeaderAdmin';
 import {useCookies} from 'react-cookie'
 import { Redirect } from 'react-router-dom';
+
+import PostServices from '../../../services/PostServices';
+import InputAddJob from './InputAddJob';
 const useStyles = makeStyles((theme) => ({
   appBar: {
     position: 'relative',
@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const steps = ['Điền thông tin', 'Xác nhận'];
+const steps = ['Điền thông tin'];
 
 
 
@@ -63,16 +63,18 @@ export default function Checkout() {
   
   const [cookie] = useCookies('')
   const [activeStep, setActiveStep] = React.useState(0);
-  const [AddJobData,setAddJobData] = React.useState({
-    name:"Name",
-    address:'address',
-    requirement:'requirement',
-    benefit:'bennefit'
-  });
-  const setData = (data)=>{
-   return  ()=>setAddJobData(data)
+  const handlePost = async()=>{
+    const post = {
+      companyName,
+      address,
+      requirement,
+      safary:benefit
+    }
+    await PostServices.createPost(post).then(rs=>console.log(rs)
+    )
   }
-  const handleNext = () => {
+  const handleNext = async() => {
+    await handlePost()
     setActiveStep(activeStep + 1);
   };
 
@@ -82,15 +84,15 @@ export default function Checkout() {
   function getStepContent(step) {
     switch (step) {
       case 0:
-        return <InputAddJob data={setData} />;
-      case 1:
-        return <CheckoutInfo data={AddJobData}/>;
+        return <InputAddJob data={{setCompanyName,setAddress,setRequirement,setBenefit}} />;
       default:
         throw new Error('Unknown step');
     }
   }
   if (cookie.token ==='admin'){return (
     <React.Fragment>
+      {console.log(companyName,' ',address)
+      }
       <CssBaseline />
       <Header />
       <main className={classes.layout}>
@@ -109,7 +111,7 @@ export default function Checkout() {
             {activeStep === steps.length ? (
               <React.Fragment>
                 <Typography variant="h5" gutterBottom>
-                  Thank you for your react.
+                 Success
                 </Typography>
               </React.Fragment>
             ) : (

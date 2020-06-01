@@ -33,7 +33,6 @@ const CreatePost = async (post) => {
 /* module get all job post */
 const GetAllPost = async() => {
   const post =await posts.find({});
-   console.log(post)
   return(post);
 }
 /* module get job post by postId */
@@ -42,14 +41,7 @@ const GetPostById = async(postId)=>{
 }
 /* module delete a post use postId */
 const DeleteAPost = async(postId)=>{
-  const rs = await posts.find({_id:postId});
-  if(rs.length>0){
-    const result = await posts.deleteMany({_id:postId});
-    if(result.deletedCount>0){
-      return true;
-    }
-  }
-  return false;
+   return await posts.deleteOne({_id:postId});
 }
 module.exports = {
   CreatePost,

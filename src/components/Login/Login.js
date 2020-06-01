@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 export default function SignIn() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [cookie, setCookie, removeCookie] = useCookies(['token'])
+  const [cookie, setCookie] = useCookies(['token'])
   const handleLogin = async () => {
     const account = {
       username,

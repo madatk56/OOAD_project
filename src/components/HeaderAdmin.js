@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Pricing() {
   const classes = useStyles();
-  const [cookie, setCookie, removeCookie] = useCookies('token');
+  const [,, removeCookie] = useCookies('token');
   const handleLogout = async () => {
     await removeCookie('token');
   }
@@ -84,7 +84,7 @@ export default function Pricing() {
             </Link>
           </nav>
 
-          <Link onClick={handleLogout} to='/login' className={classes.link} >
+          <Link onClick={handleLogout} to='/' className={classes.link} >
             <Button  color="primary" variant="outlined" className={classes.link}>Đăng xuất</Button>
           </Link>
 

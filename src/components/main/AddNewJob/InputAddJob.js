@@ -2,7 +2,8 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-export default function AddressForm() {
+export default function AddressForm(props) {
+  const {setCompanyName,setAddress,setRequirement,setBenefit} = props.data;
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -16,6 +17,7 @@ export default function AddressForm() {
             id="companyName"
             name="companyName"
             label="Tên công ty"
+            onChange={(e)=>{setCompanyName(e.target.value)}}
             fullWidth
           />
         </Grid>
@@ -25,6 +27,7 @@ export default function AddressForm() {
             id="address"
             name="address"
             label="Địa chỉ"
+            onChange={(e)=>{setAddress(e.target.value)}}
             fullWidth
             autoComplete="billing address-line1"
           />
@@ -34,6 +37,7 @@ export default function AddressForm() {
             required
             id="require"
             name="require"
+            onChange={(e)=>{setRequirement(e.target.value)}}
             label="Yêu cầu"
             fullWidth
             multiline
@@ -44,12 +48,14 @@ export default function AddressForm() {
             id="benefit"
             name="benefit"
             label="Quyền lợi"
+            onChange={(e)=>{setBenefit(e.target.value)}}
             fullWidth
             multiline
             autoComplete="billing address-line2"
           />
         </Grid>
       </Grid>
+      
     </React.Fragment>
   );
 }
